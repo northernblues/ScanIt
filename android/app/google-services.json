@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1025171017878",
+    "project_id": "scanit-77760",
+    "storage_bucket": "scanit-77760.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025171017878:android:3250fde83784d99661b2b7",
+        "android_client_info": {
+          "package_name": "com.example.scanit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025171017878-3vllss4g3prbieba00vbuat454p2ntf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOwEk4pdm61B1-hS8sEjMY5ZJS2TXnbTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025171017878-3vllss4g3prbieba00vbuat454p2ntf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
