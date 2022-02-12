@@ -119,16 +119,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
 
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => const PDFScreen(),
-          ));
-        },
-        label: const Text('Image Collection to PDF'),
-        icon: const Icon(Icons.picture_as_pdf),
-        backgroundColor: Colors.pink,
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {
+      //   //   Navigator.push(context, MaterialPageRoute(
+      //   //     builder: (context) => const PDFScreen(),
+      //   //   ));
+      //   },
+      //   // label: const Text('Image Collection to PDF'),
+      //   // icon: const Icon(Icons.picture_as_pdf),
+      //   // backgroundColor: Colors.pink,
+      // ),
 
       bottomNavigationBar: const BottomAppBar(
 
