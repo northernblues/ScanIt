@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:scanit/CaptureScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scanit/PDFScreen.dart';
 
 
 void main() => runApp(const MaterialApp(
