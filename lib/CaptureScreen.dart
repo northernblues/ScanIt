@@ -172,8 +172,8 @@ class _CaptureScreenState extends State<CaptureScreen> {
             const SizedBox(height: 100),
             isImageLoaded?  Center(
               child: Container(
-                height: 250.0,
-                width: 250.0,
+                height: 300.0,
+                width: 300.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: FileImage(pickedImage),
