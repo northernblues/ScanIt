@@ -1,8 +1,8 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:clipboard/clipboard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:image_cropper/image_cropper.dart';
 // import 'package:edge_detection/edge_detection.dart';
+
 
 
 
@@ -77,8 +78,6 @@ class _CaptureScreenState extends State<CaptureScreen> {
 
 
   }
-
-
   cropImage(File picked) async{
     File? cropped = await ImageCropper.cropImage(
       androidUiSettings: const AndroidUiSettings(
@@ -109,6 +108,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
 
 
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
 
@@ -116,28 +116,31 @@ class _CaptureScreenState extends State<CaptureScreen> {
   {
     selectedItem = ModalRoute.of(context)!.settings.arguments.toString();
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         title: Text(selectedItem,
-        style: GoogleFonts.atma(
-          fontSize: 15.0,
-          fontWeight: FontWeight.bold,
-        ),
+          style: GoogleFonts.atma(
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold,
           ),
+        ),
         actions: [
           TextButton(
-              onPressed: getImageFromGallery,
-              child: const Icon(
-                Icons.add_a_photo,
-                color: Colors.white,
-              ),
+            onPressed: getImageFromGallery,
+            child: const Icon(
+              Icons.add_a_photo,
+              color: Colors.white,
+            ),
 
           ),
 
 
-        IconButton(
-              icon: const Icon(Icons.copy),
+          IconButton(
+            icon: const Icon(Icons.copy),
             onPressed: (){
-          }, )
+              FlutterClipboard.copy(finalText).then((value) => _key.currentState?..showSnackBar(const SnackBar(content: Text('Copied'))));
+
+            }, )
         ],
       ),
 
@@ -148,22 +151,16 @@ class _CaptureScreenState extends State<CaptureScreen> {
           children: [
             const SizedBox(height: 100),
             isImageLoaded?  Center(
-              child: Container(
-              //   height: 300.0,
-              //   width: 300.0,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //         image: FileImage(pickedImage),
-              //         fit: BoxFit.cover
-              //   ),
-              // ),
-                alignment: Alignment.center,
-                child: Image.file(
-                  pickedImage,
-                  fit: BoxFit.contain, // This is needed
-                  width: 300,
-                ),
-            )
+                child: Container(
+                  height: 300.0,
+                  width: 300.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: FileImage(pickedImage),
+                        fit: BoxFit.contain
+                    ),
+                  ),
+                )
             ) : Container(),
 
             const SizedBox(height: 60.0),
@@ -173,6 +170,29 @@ class _CaptureScreenState extends State<CaptureScreen> {
 
               ),
             ),
+            // Center(
+            //   child: TextButton(
+            //     onPressed: (){
+            //       getImageFromGallery();
+            //       Future.delayed(const Duration(seconds: 6),(){
+            //         getText(imagePath);
+            //       });
+            //     },
+            //     child: Text(
+            //       "PickImage",
+            //       style: GoogleFonts.aBeeZee(
+            //         fontSize: 30,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Text(
+            //   finalText?? "This is a text",
+            // style: GoogleFonts.aBeeZee(
+            //   color:Colors.red,
+            // ),),
+
+
           ],
 
         ),
@@ -183,26 +203,25 @@ class _CaptureScreenState extends State<CaptureScreen> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // getText(imagePath);
-
+          
         },
         child: const Icon(
-          Icons.check
+            Icons.check
         ),
       ),
 
 
-        bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
 
-          child: IconButton(icon: const Icon(Icons.picture_as_pdf,
-            color: Colors.pink,
+        child: IconButton(icon: const Icon(Icons.picture_as_pdf,
+          color: Colors.pink,
 
-          ), onPressed: () {
-            // createPDF();
-            // savePDF();
-            }),
+        ), onPressed: () {
+          createPDF();
+          savePDF();
+        }),
 
-            ),
+      ),
 
     );
 
@@ -266,10 +285,3 @@ class _CaptureScreenState extends State<CaptureScreen> {
 
 
 }
-
-
-
-
-
-
-
