@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:another_flushbar/flushbar.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 
 
@@ -222,207 +224,47 @@ class _CaptureScreenState extends State<CaptureScreen> {
 
 
 
+createPDF() async{
 
+  final image = pw.MemoryImage(
+    pickedImage.readAsBytesSync(),
+  );
 
 
+  pdf.addPage(pw.Page(pageFormat: PdfPageFormat.a4, build: (pw.Context context) {
+    return pw.Center(
+      child: pw.Image(image),
 
 
+    ); // Center
+  }));
 
 
 
+}
 
 
 
+savePDF() async{
+  String imageName = pickedImage.path.split('/').last;
 
 
+  try{
 
+    final dir = await getExternalStorageDirectory();
+    final file = File('${dir!.path}/$imageName.pdf');
+    await file.writeAsBytes(await pdf.save());
+    showPrintedMessage('success', 'saved to Documents');
 
 
+  }
+  catch(e){
+    showPrintedMessage('error', e.toString());
 
+  }
 
 
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   createPDF() async{
-//
-//       final image = pw.MemoryImage(
-//       pickedImage.readAsBytesSync(),
-//     );
-//
-//
-//     pdf.addPage(pw.Page(pageFormat: PdfPageFormat.a4, build: (pw.Context context) {
-//       return pw.Center(
-//         child: pw.Image(image),
-//
-//
-//       ); // Center
-//     }));
-//
-//
-//
-//   }
-//
-//
-//
-//   savePDF() async{
-//     String imageName = pickedImage.path.split('/').last;
-//
-//
-//     try{
-//
-//         final dir = await getExternalStorageDirectory();
-//         final file = File('${dir!.path}/$imageName.pdf');
-//         await file.writeAsBytes(await pdf.save());
-//         showPrintedMessage('success', 'saved to Documents');
-//
-//
-//     }
-//     catch(e){
-//       showPrintedMessage('error', e.toString());
-//
-//     }
-//
-//
-//   }
-
-
-
-
-
-  // Future getText(String path) async {
-  //   finalText = '';
-  //   final inputImage = InputImage.fromFile(pickedImage);
-  //   final textDetector = GoogleMlKit.vision.textDetector();
-  //   final RecognisedText _recognizedText = await textDetector.processImage(
-  //       inputImage);
-  //
-  //   for (TextBlock block in _recognizedText.blocks) {
-  //     for (TextLine textLine in block.lines) {
-  //       for (TextElement textElement in textLine.elements) {
-  //         setState(() {
-  //           finalText = finalText + ' ' + textElement.text;
-  //         });
-  //       }
-  //
-  //       finalText = finalText + "\n";
-  //     }
-  //   }
-  // }
