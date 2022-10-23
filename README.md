@@ -1,6 +1,6 @@
 # scanit
 
-A new Flutter project.
+ScanIT - A mobile application developed with Flutter to extract selectable Texts from Images.
 
 ## Getting Started
 
